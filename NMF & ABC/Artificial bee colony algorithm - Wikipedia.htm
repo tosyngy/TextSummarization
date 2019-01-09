@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>Artificial bee colony algorithm - Wikipedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Artificial_bee_colony_algorithm","wgTitle":"Artificial bee colony algorithm","wgCurRevisionId":781039449,"wgRevisionId":781039449,"wgArticleId":14382068,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Articles lacking reliable references from April 2017","All articles lacking reliable references","Articles needing additional references from April 2017","All articles needing additional references","Nature-inspired metaheuristics"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Artificial_bee_colony_algorithm","wgRelevantArticleId":14382068,"wgRequestId":"WWkpdQpAMEoAACfkwI0AAAAI","wgIsProbablyEditable":true,"wgRelevantPageIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgFlaggedRevsParams":{"tags":{}},"wgStableRevisionId":null,"wgWikiEditorEnabledModules":{"toolbar":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":false,"wgPopupsShouldSendModuleToUser":false,"wgPopupsConflictsWithNavPopupGadget":false,"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"en","wgMFExpandAllSectionsUserOption":false,"wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":false},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"English","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q4801057","wgCentralAuthMobileDomain":false,"wgVisualEditorToolbarScrollOffset":0,"wgVisualEditorUnsupportedEditParams":["preload","preloadparams","preloadtitle","undo","undoafter","veswitched"],"wgEditSubmitButtonLabelPublish":false});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.cite.styles":"ready","ext.math.styles":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0gii3s4",function($,jQuery,require,module){mw.user.options.set([]);});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["ext.cite.a11y","ext.math.scripts","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.toc","mediawiki.searchSuggest","ext.gadget.teahouse","ext.gadget.ReferenceTooltips","ext.gadget.watchlist-notice","ext.gadget.DRN-wizard","ext.gadget.charinsert","ext.gadget.refToolbar","ext.gadget.extra-toolbar-buttons","ext.gadget.switcher","ext.gadget.featured-articles-links","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.interface","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=en&amp;modules=ext.cite.styles%7Cext.math.styles%7Cext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles%7Cwikibase.client.init&amp;only=styles&amp;skin=vector"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector"/>
+<meta name="generator" content="MediaWiki 1.30.0-wmf.7"/>
+<meta name="referrer" content="origin-when-cross-origin"/>
+<link rel="alternate" href="android-app://org.wikipedia/http/en.m.wikipedia.org/wiki/Artificial_bee_colony_algorithm"/>
+<link rel="alternate" type="application/x-wiki" title="Edit this page" href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=edit"/>
+<link rel="edit" title="Edit this page" href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=edit"/>
+<link rel="apple-touch-icon" href="/static/apple-touch/wikipedia.png"/>
+<link rel="shortcut icon" href="/static/favicon/wikipedia.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikipedia (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="//en.wikipedia.org/w/api.php?action=rsd"/>
+<link rel="copyright" href="//creativecommons.org/licenses/by-sa/3.0/"/>
+<link rel="canonical" href="https://en.wikipedia.org/wiki/Artificial_bee_colony_algorithm"/>
+<link rel="dns-prefetch" href="//login.wikimedia.org"/>
+<link rel="dns-prefetch" href="//meta.wikimedia.org" />
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Artificial_bee_colony_algorithm rootpage-Artificial_bee_colony_algorithm skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+							<div id="siteNotice" class="mw-body-content"><!-- CentralNotice --></div>
+						<div class="mw-indicators mw-body-content">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">Artificial bee colony algorithm</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From Wikipedia, the free encyclopedia</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><div class="mw-parser-output"><table class="plainlinks metadata ambox ambox-content" role="presentation">
+<tr>
+<td class="mbox-image">
+<div style="width:52px"><a href="/wiki/File:Question_book-new.svg" class="image"><img alt="Question book-new.svg" src="//upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png" width="50" height="39" srcset="//upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/75px-Question_book-new.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/100px-Question_book-new.svg.png 2x" data-file-width="512" data-file-height="399" /></a></div>
+</td>
+<td class="mbox-text"><span class="mbox-text-span">This article <b>may rely excessively on sources too closely associated with the subject</b>, potentially preventing the article from being <a href="/wiki/Wikipedia:Verifiability" title="Wikipedia:Verifiability">verifiable</a> and <a href="/wiki/Wikipedia:Neutral_point_of_view" title="Wikipedia:Neutral point of view">neutral</a>. <span class="hide-when-compact">Please help <a class="external text" href="//en.wikipedia.org/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=edit">improve it</a> by replacing them with more appropriate <a href="/wiki/Wikipedia:Citing_sources" title="Wikipedia:Citing sources">citations</a> to <a href="/wiki/Wikipedia:Identifying_and_using_independent_sources" title="Wikipedia:Identifying and using independent sources">reliable, independent, third-party sources</a>.</span> <small><i>(April 2017)</i></small> <small class="hide-when-compact"><i>(<a href="/wiki/Help:Maintenance_template_removal" title="Help:Maintenance template removal">Learn how and when to remove this template message</a>)</i></small></span></td>
+</tr>
+</table>
+<table class="plainlinks metadata ambox ambox-content ambox-one_source" role="presentation">
+<tr>
+<td class="mbox-image">
+<div style="width:52px"><a href="/wiki/File:Question_book-new.svg" class="image"><img alt="Question book-new.svg" src="//upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png" width="50" height="39" srcset="//upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/75px-Question_book-new.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/100px-Question_book-new.svg.png 2x" data-file-width="512" data-file-height="399" /></a></div>
+</td>
+<td class="mbox-text"><span class="mbox-text-span">This article <b>relies largely or entirely on a single <a href="/wiki/Wikipedia:Identifying_reliable_sources" title="Wikipedia:Identifying reliable sources">source</a></b>. <span class="hide-when-compact">Relevant discussion may be found on the <a href="/wiki/Talk:Artificial_bee_colony_algorithm#.23" title="Talk:Artificial bee colony algorithm">talk page</a>. Please help <a class="external text" href="//en.wikipedia.org/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=edit">improve this article</a> by introducing <a href="/wiki/Wikipedia:Citing_sources" title="Wikipedia:Citing sources">citations</a> to additional sources.</span> <small><i>(April 2017)</i></small></span></td>
+</tr>
+</table>
+<div role="note" class="hatnote navigation-not-searchable">Not to be confused with <a href="/wiki/Bees_algorithm" title="Bees algorithm">Bees algorithm</a>.</div>
+<p>In <a href="/wiki/Computer_science" title="Computer science">computer science</a> and <a href="/wiki/Operations_research" title="Operations research">operations research</a>, the <b>artificial bee colony algorithm</b> (<b>ABC</b>) is an optimization algorithm based on the intelligent foraging behaviour of honey bee swarm, proposed by Karaboga in 2005.<sup id="cite_ref-Karaboga2005_1-0" class="reference"><a href="#cite_note-Karaboga2005-1">[1]</a></sup></p>
+<p></p>
+<div id="toc" class="toc">
+<div class="toctitle">
+<h2>Contents</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Algorithm"><span class="tocnumber">1</span> <span class="toctext">Algorithm</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Artificial_bee_colony_algorithm"><span class="tocnumber">2</span> <span class="toctext">Artificial bee colony algorithm</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#See_also"><span class="tocnumber">3</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#References"><span class="tocnumber">4</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#External_links"><span class="tocnumber">5</span> <span class="toctext">External links</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="Algorithm">Algorithm</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=edit&amp;section=1" title="Edit section: Algorithm">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>In the ABC model, the colony consists of three groups of bees: employed bees, onlookers and scouts. It is assumed that there is only one artificial employed bee for each food source. In other words, the number of employed bees in the colony is equal to the number of food sources around the hive. Employed bees go to their food source and come back to hive and dance on this area. The employed bee whose food source has been abandoned becomes a scout and starts to search for finding a new food source. Onlookers watch the dances of employed bees and choose food sources depending on dances. The main steps of the algorithm are given below.:<sup id="cite_ref-Karaboga2005_1-1" class="reference"><a href="#cite_note-Karaboga2005-1">[1]</a></sup></p>
+<ul>
+<li>Initial food sources are produced for all employed bees</li>
+<li>REPEAT
+<ul>
+<li>Each employed bee goes to a food source in her memory and determines a neighbour source, then evaluates its nectar amount and dances in the hive</li>
+<li>Each onlooker watches the dance of employed bees and chooses one of their sources depending on the dances, and then goes to that source. After choosing a neighbour around that, she evaluates its nectar amount.</li>
+<li>Abandoned food sources are determined and are replaced with the new food sources discovered by scouts.</li>
+<li>The best food source found so far is registered.</li>
+</ul>
+</li>
+<li>UNTIL (requirements are met)</li>
+</ul>
+<p>In ABC, a population based algorithm, the position of a food source represents a possible solution to the optimization problem and the nectar amount of a food source corresponds to the quality (fitness) of the associated solution. The number of the employed bees is equal to the number of solutions in the population. At the first step, a randomly distributed initial population (food source positions) is generated. After initialization, the population is subjected to repeat the cycles of the search processes of the employed, onlooker, and scout bees, respectively. An employed bee produces a modification on the source position in her memory and discovers a new food source position. Provided that the nectar amount of the new one is higher than that of the previous source, the bee memorizes the new source position and forgets the old one. Otherwise she keeps the position of the one in her memory. After all employed bees complete the search process, they share the position information of the sources with the onlookers on the dance area. Each onlooker evaluates the nectar information taken from all employed bees and then chooses a food source depending on the nectar amounts of sources. As in the case of the employed bee, she produces a modification on the source position in her memory and checks its nectar amount. Providing that its nectar is higher than that of the previous one, the bee memorizes the new position and forgets the old one. The sources abandoned are determined and new sources are randomly produced to be replaced with the abandoned ones by artificial scouts.</p>
+<h2><span class="mw-headline" id="Artificial_bee_colony_algorithm">Artificial bee colony algorithm</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=edit&amp;section=2" title="Edit section: Artificial bee colony algorithm">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>Artificial bee colony (ABC) algorithm is an optimization technique that simulates the foraging behavior of honey bees, and has been successfully applied to various practical problems. ABC belongs to the group of swarm intelligence algorithms and was proposed by Karaboga in 2005.</p>
+<p>A set of honey bees, called swarm, can successfully accomplish tasks through social cooperation. In the ABC algorithm, there are three types of bees: employed bees, onlooker bees, and scout bees. The employed bees search food around the food source in their memory; meanwhile they share the information of these food sources to the onlooker bees. The onlooker bees tend to select good food sources from those found by the employed bees. The food source that has higher quality (fitness) will have a large chance to be selected by the onlooker bees than the one of lower quality. The scout bees are translated from a few employed bees, which abandon their food sources and search new ones.</p>
+<p>In the ABC algorithm, the first half of the swarm consists of employed bees, and the second half constitutes the onlooker bees.</p>
+<p>The number of employed bees or the onlooker bees is equal to the number of solutions in the swarm. The ABC generates a randomly distributed initial population of SN solutions (food sources), where SN denotes the swarm size.</p>
+<p>Let <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mo fence="false" stretchy="false">{</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>,</mo>
+            <mn>1</mn>
+          </mrow>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>,</mo>
+            <mn>2</mn>
+          </mrow>
+        </msub>
+        <mo>,</mo>
+        <mo>&#x2026;<!-- … --></mo>
+        <mo>,</mo>
+        <msub>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+            <mo>,</mo>
+            <mi>n</mi>
+          </mrow>
+        </msub>
+        <mo fence="false" stretchy="false">}</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle X_{i}=\{x_{i,1},x_{i,2},\ldots ,x_{i,n}\}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/fa26b5153d901f463306ea9ddc0861b9d41580d0" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:24.939ex; height:3.009ex;" alt="{\displaystyle X_{i}=\{x_{i,1},x_{i,2},\ldots ,x_{i,n}\}}" /></span> represent the <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msup>
+          <mi>i</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>t</mi>
+            <mi>h</mi>
+          </mrow>
+        </msup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle i^{th}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9c454bb35f050556d361ee85e06ca923b16a3bf4" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.6ex; height:2.676ex;" alt="i^{th}" /></span> solution in the swarm, Where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>n</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle n}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.405ex; height:1.676ex;" alt="n" /></span> is the dimension size. Each employed bee <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle X_{i}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/af4a0955af42beb5f85aa05fb8c07abedc13990d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.742ex; height:2.509ex;" alt="X_{i}" /></span> generates a new candidate solution <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>V</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle V_{i}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f300b83673e961a9d48f3862216b167f94e5668c" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.173ex; height:2.509ex;" alt="V_{i}" /></span> in the neighborhood of its present position as equation below:</p>
+<center><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>V</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msub>
+              <mi>i</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>k</mi>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <msub>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msub>
+              <mi>i</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>k</mi>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+        <mo>+</mo>
+        <msub>
+          <mi mathvariant="normal">&#x03A6;<!-- Φ --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msub>
+              <mi>i</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>k</mi>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+        <mo>&#x00D7;<!-- × --></mo>
+        <mo stretchy="false">(</mo>
+        <msub>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msub>
+              <mi>i</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>k</mi>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+        <mo>&#x2212;<!-- − --></mo>
+        <msub>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msub>
+              <mi>j</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>k</mi>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle V_{i_{k}}=X_{i_{k}}+\Phi _{i_{k}}\times (X_{i_{k}}-X_{j_{k}})}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2d4ab4ab93fb8cc5d8821c13111ac2c457d2e389" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:30.823ex; height:3.009ex;" alt="V_{i_{k}} = X_{i_{k}}+\Phi_{i_{k}}\times (X_{i_k}-X_{j_k})  " /></span></center>
+<p>Where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle X_{j}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ca3cb1ef7c9f25e85e1957e4eb58a72fa16a0066" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:2.852ex; height:2.843ex;" alt="X_{{j}}" /></span> is a randomly selected candidate solution (<span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>i</mi>
+        <mo>&#x2260;<!-- ≠ --></mo>
+        <mi>j</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle i\neq j}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d95aeb406bb427ac96806bc00c30c91d31b858be" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:4.89ex; height:2.843ex;" alt="i\neq j" /></span>), <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>k</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle k}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c3c9a2c7b599b37105512c5d570edc034056dd40" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.222ex; height:2.176ex;" alt="k" /></span> is a random dimension index selected from the set <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo fence="false" stretchy="false">{</mo>
+        <mn>1</mn>
+        <mo>,</mo>
+        <mn>2</mn>
+        <mo>,</mo>
+        <mo>&#x2026;<!-- … --></mo>
+        <mo>,</mo>
+        <mi>n</mi>
+        <mo fence="false" stretchy="false">}</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \{1,2,\ldots ,n\}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/4ebfec86b3f22a18f086275390917d5aaa2d8c22" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:12.351ex; height:2.843ex;" alt="\{1,2,\ldots ,n\}" /></span> , and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi mathvariant="normal">&#x03A6;<!-- Φ --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msub>
+              <mi>i</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>k</mi>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \Phi _{i_{k}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f7c654e39a3e016d5de6d0f7909c496647c6ef5e" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:3.361ex; height:2.843ex;" alt="\Phi_{i_{k}}" /></span> is a random number within <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo stretchy="false">[</mo>
+        <mo>&#x2212;<!-- − --></mo>
+        <mn>1</mn>
+        <mo>,</mo>
+        <mn>1</mn>
+        <mo stretchy="false">]</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle [-1,1]}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/51e3b7f14a6f70e614728c583409a0b9a8b9de01" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:6.523ex; height:2.843ex;" alt="[-1,1]" /></span>. Once the new candidate solution <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>V</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle V_{i}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f300b83673e961a9d48f3862216b167f94e5668c" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.173ex; height:2.509ex;" alt="V_{i}" /></span> is generated, a greedy selection is used. If the fitness value of <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>V</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle V_{i}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f300b83673e961a9d48f3862216b167f94e5668c" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.173ex; height:2.509ex;" alt="V_{i}" /></span> is better than that of its parent <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle X_{i}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/af4a0955af42beb5f85aa05fb8c07abedc13990d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.742ex; height:2.509ex;" alt="X_{i}" /></span>, then update <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle X_{i}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/af4a0955af42beb5f85aa05fb8c07abedc13990d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.742ex; height:2.509ex;" alt="X_{i}" /></span> with <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>V</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle V_{i}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f300b83673e961a9d48f3862216b167f94e5668c" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.173ex; height:2.509ex;" alt="V_{i}" /></span>; otherwise keep <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle X_{i}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/af4a0955af42beb5f85aa05fb8c07abedc13990d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.742ex; height:2.509ex;" alt="X_{i}" /></span> unchanged. After all employed bees complete the search process; they share the information of their food sources with the onlooker bees through waggle dances. An onlooker bee evaluates the nectar information taken from all employed bees and chooses a food source with a probability related to its nectar amount. This probabilistic selection is really a roulette wheel selection mechanism which is described as equation below:</p>
+<center><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>P</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mrow>
+              <mi>f</mi>
+              <mi>i</mi>
+              <msub>
+                <mi>t</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>i</mi>
+                </mrow>
+              </msub>
+            </mrow>
+            <mrow>
+              <munder>
+                <mo>&#x2211;<!-- ∑ --></mo>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>j</mi>
+                </mrow>
+              </munder>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>f</mi>
+                <mi>i</mi>
+                <msub>
+                  <mi>t</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>j</mi>
+                  </mrow>
+                </msub>
+              </mrow>
+            </mrow>
+          </mfrac>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle P_{i}={\frac {fit_{i}}{\sum _{j}{fit_{j}}}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/38290eafef8324972b6a5ea6d56464b2670a1403" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.171ex; width:13.892ex; height:6.843ex;" alt="{\displaystyle P_{i}={\frac {fit_{i}}{\sum _{j}{fit_{j}}}}}" /></span></center>
+<p>Where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>f</mi>
+        <mi>i</mi>
+        <msub>
+          <mi>t</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle fit_{i}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a8c0d3f9fa3b1dc839af599e68f5c742778bcaa7" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:3.759ex; height:2.509ex;" alt="fit_i" /></span> is the fitness value of the <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msup>
+          <mi>i</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>t</mi>
+            <mi>h</mi>
+          </mrow>
+        </msup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle i^{th}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9c454bb35f050556d361ee85e06ca923b16a3bf4" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.6ex; height:2.676ex;" alt="i^{th}" /></span> solution in the swarm. As seen, the better the solution <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>i</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle i}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/add78d8608ad86e54951b8c8bd6c8d8416533d20" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:0.813ex; height:2.176ex;" alt="i" /></span>, the higher the probability of the <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msup>
+          <mi>i</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>t</mi>
+            <mi>h</mi>
+          </mrow>
+        </msup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle i^{th}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9c454bb35f050556d361ee85e06ca923b16a3bf4" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.6ex; height:2.676ex;" alt="i^{th}" /></span>food source selected. If a position cannot be improved over a predefined number (called limit) of cycles, then the food source is abandoned. Assume that the abandoned source is <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle X_{i}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/af4a0955af42beb5f85aa05fb8c07abedc13990d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:2.742ex; height:2.509ex;" alt="X_{i}" /></span>, and then the scout bee discovers a new food source to be replaced with <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msup>
+          <mi>i</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>t</mi>
+            <mi>h</mi>
+          </mrow>
+        </msup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle i^{th}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9c454bb35f050556d361ee85e06ca923b16a3bf4" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.6ex; height:2.676ex;" alt="i^{th}" /></span> as equation below:</p>
+<center><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi>X</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msub>
+              <mi>i</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>k</mi>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mi>l</mi>
+        <msub>
+          <mi>b</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+          </mrow>
+        </msub>
+        <mo>+</mo>
+        <mi>r</mi>
+        <mi>a</mi>
+        <mi>n</mi>
+        <mi>d</mi>
+        <mo stretchy="false">(</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo>&#x00D7;<!-- × --></mo>
+        <mo stretchy="false">(</mo>
+        <mi>u</mi>
+        <msub>
+          <mi>b</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+          </mrow>
+        </msub>
+        <mo>&#x2212;<!-- − --></mo>
+        <mi>l</mi>
+        <msub>
+          <mi>b</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>j</mi>
+          </mrow>
+        </msub>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle X_{i_{k}}=lb_{j}+rand(0,1)\times (ub_{j}-lb_{j})}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/caa2d85effd213f3ba988b7431a7beb3f56a35d6" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:35.773ex; height:3.009ex;" alt="X_{i_{k}}=lb_{j}+rand(0,1)\times(ub_{j}-lb_{j})   " /></span></center>
+<p>Where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>r</mi>
+        <mi>a</mi>
+        <mi>n</mi>
+        <mi>d</mi>
+        <mo stretchy="false">(</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle rand(0,1)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d48a7d920c11e1dee983610d97d119beb2d87359" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:10.151ex; height:2.843ex;" alt="rand(0,1)" /></span> is a random number within<span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo stretchy="false">[</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mn>1</mn>
+        <mo stretchy="false">]</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle [0,1]}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/738f7d23bb2d9642bab520020873cccbef49768d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:4.705ex; height:2.843ex;" alt="[0,1]" /></span> based on a normal distribution and <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>l</mi>
+        <mi>b</mi>
+        <mo>,</mo>
+        <mi>u</mi>
+        <mi>b</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle lb,ub}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/4a1df5d534adec276cc9a7db17cd48d82d104f1f" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:5.104ex; height:2.509ex;" alt="lb,ub" /></span>, are lower and upper boundaries of the <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msup>
+          <mi>i</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>t</mi>
+            <mi>h</mi>
+          </mrow>
+        </msup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle i^{th}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9c454bb35f050556d361ee85e06ca923b16a3bf4" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.6ex; height:2.676ex;" alt="i^{th}" /></span> dimension, respectively.</p>
+<h2><span class="mw-headline" id="See_also">See also</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=edit&amp;section=3" title="Edit section: See also">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a href="/wiki/Evolutionary_computation" title="Evolutionary computation">Evolutionary computation</a></li>
+<li><a href="/wiki/Evolutionary_multi-modal_optimization" class="mw-redirect" title="Evolutionary multi-modal optimization">Evolutionary multi-modal optimization</a></li>
+<li><a href="/wiki/Particle_swarm_optimization" title="Particle swarm optimization">Particle swarm optimization</a></li>
+<li><a href="/wiki/Swarm_intelligence" title="Swarm intelligence">Swarm intelligence</a></li>
+<li><a href="/wiki/Bees_algorithm" title="Bees algorithm">Bees algorithm</a></li>
+<li><a href="/wiki/Fish_School_Search" title="Fish School Search">Fish School Search</a></li>
+</ul>
+<h2><span class="mw-headline" id="References">References</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=edit&amp;section=4" title="Edit section: References">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="reflist" style="list-style-type: decimal;">
+<div class="mw-references-wrap">
+<ol class="references">
+<li id="cite_note-Karaboga2005-1"><span class="mw-cite-backlink">^ <a href="#cite_ref-Karaboga2005_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-Karaboga2005_1-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation journal">Karaboga, Dervis (2005). <a rel="nofollow" class="external text" href="http://mf.erciyes.edu.tr/abc/pub/tr06_2005.pdf">"An Idea Based on Honey Bee Swarm For Numerical Optimization"</a> <span style="font-size:85%;">(PDF)</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AArtificial+bee+colony+algorithm&amp;rft.atitle=An+Idea+Based+on+Honey+Bee+Swarm+For+Numerical+Optimization&amp;rft.aufirst=Dervis&amp;rft.aulast=Karaboga&amp;rft.date=2005&amp;rft.genre=article&amp;rft_id=http%3A%2F%2Fmf.erciyes.edu.tr%2Fabc%2Fpub%2Ftr06_2005.pdf&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&#160;</span></span></span></li>
+</ol>
+</div>
+</div>
+<h2><span class="mw-headline" id="External_links">External links</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=edit&amp;section=5" title="Edit section: External links">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><cite class="citation"><a rel="nofollow" class="external text" href="http://mf.erciyes.edu.tr/abc"><i>Artificial Bee Colony (ABC) Algorithm Homepage</i></a>, Turkey: Intelligent Systems Research Group, Department of Computer Engineering, <a href="/wiki/Erciyes_University" title="Erciyes University">Erciyes University</a></cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3AArtificial+bee+colony+algorithm&amp;rft.btitle=Artificial+Bee+Colony+%28ABC%29+Algorithm+Homepage&amp;rft.genre=book&amp;rft.place=Turkey&amp;rft.pub=Intelligent+Systems+Research+Group%2C+Department+of+Computer+Engineering%2C+Erciyes+University&amp;rft_id=http%3A%2F%2Fmf.erciyes.edu.tr%2Fabc&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook" class="Z3988"><span style="display:none;">&#160;</span></span></li>
+</ul>
+<div role="navigation" class="navbox navbox-spacing-temp" aria-labelledby="Optimization:_Algorithms.2C_methods.2C_and_heuristics" style="padding:3px">
+<table class="nowraplinks hlist collapsible uncollapsed navbox-inner" style="border-spacing:0;background:transparent;color:inherit">
+<tr>
+<th scope="col" class="navbox-title" colspan="3">
+<div class="plainlinks hlist navbar mini">
+<ul>
+<li class="nv-view"><a href="/wiki/Template:Optimization_algorithms" title="Template:Optimization algorithms"><abbr title="View this template" style=";;background:none transparent;border:none;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;">v</abbr></a></li>
+<li class="nv-talk"><a href="/wiki/Template_talk:Optimization_algorithms" title="Template talk:Optimization algorithms"><abbr title="Discuss this template" style=";;background:none transparent;border:none;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;">t</abbr></a></li>
+<li class="nv-edit"><a class="external text" href="//en.wikipedia.org/w/index.php?title=Template:Optimization_algorithms&amp;action=edit"><abbr title="Edit this template" style=";;background:none transparent;border:none;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;">e</abbr></a></li>
+</ul>
+</div>
+<div id="Optimization:_Algorithms.2C_methods.2C_and_heuristics" style="font-size:114%;margin:0 4em"><a href="/wiki/Mathematical_optimization" title="Mathematical optimization">Optimization</a>: <a href="/wiki/Optimization_algorithm" class="mw-redirect" title="Optimization algorithm">Algorithms</a>, <a href="/wiki/Iterative_method" title="Iterative method">methods</a>, and <a href="/wiki/Heuristic_algorithm" class="mw-redirect" title="Heuristic algorithm">heuristics</a></div>
+</th>
+</tr>
+<tr>
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="col" class="navbox-title" colspan="2" style=";">
+<div id="Unconstrained_nonlinear:_Methods_calling_.E2.80.A6" style="font-size:114%;margin:0 4em"><a href="/wiki/Nonlinear_programming" title="Nonlinear programming">Unconstrained nonlinear</a>: <a href="/wiki/Iterative_method" title="Iterative method">Methods</a> <a href="/wiki/Subroutine" title="Subroutine">calling …</a></div>
+</th>
+</tr>
+<tr>
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">… <a href="/wiki/Function_(mathematics)" title="Function (mathematics)">functions</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Golden-section_search" title="Golden-section search">Golden-section search</a></li>
+<li><a href="/wiki/Powell%27s_method" title="Powell's method">Interpolation methods</a></li>
+<li><a href="/wiki/Line_search" title="Line search">Line search</a></li>
+<li><a href="/wiki/Nelder%E2%80%93Mead_method" title="Nelder–Mead method">Nelder–Mead method</a></li>
+<li><a href="/wiki/Successive_parabolic_interpolation" title="Successive parabolic interpolation">Successive parabolic interpolation</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">… and <a href="/wiki/Gradient" title="Gradient">gradients</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Local_convergence" title="Local convergence">Convergence</a></th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Trust_region" title="Trust region">Trust region</a></li>
+<li><a href="/wiki/Wolfe_conditions" title="Wolfe conditions">Wolfe conditions</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Quasi-Newton_method" title="Quasi-Newton method">Quasi–Newton</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm" title="Broyden–Fletcher–Goldfarb–Shanno algorithm">BFGS</a> and <a href="/wiki/Limited-memory_BFGS" title="Limited-memory BFGS">L-BFGS</a></li>
+<li><a href="/wiki/Davidon%E2%80%93Fletcher%E2%80%93Powell_formula" title="Davidon–Fletcher–Powell formula">DFP</a></li>
+<li><a href="/wiki/Symmetric_rank-one" title="Symmetric rank-one">Symmetric rank-one (SR1)</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Iterative_method" title="Iterative method">Other methods</a></th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Gauss%E2%80%93Newton_algorithm" title="Gauss–Newton algorithm">Gauss–Newton</a></li>
+<li><a href="/wiki/Gradient_descent" title="Gradient descent">Gradient</a></li>
+<li><a href="/wiki/Levenberg%E2%80%93Marquardt_algorithm" title="Levenberg–Marquardt algorithm">Levenberg–Marquardt</a></li>
+<li><a href="/wiki/Nonlinear_conjugate_gradient_method" title="Nonlinear conjugate gradient method">Conjugate gradient</a></li>
+<li><a href="/wiki/Truncated_Newton_method" title="Truncated Newton method">Truncated Newton</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">… and <a href="/wiki/Hessian_matrix" title="Hessian matrix">Hessians</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Newton%27s_method_in_optimization" title="Newton's method in optimization">Newton's method</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td class="navbox-image" rowspan="5" style="width:1px;padding:0px 0px 0px 2px">
+<div>
+<div class="floatright"><a href="/wiki/File:Max_paraboloid.svg" class="image" title="Optimization computes maxima and minima."><img alt="Graph of a strictly concave quadratic function with unique maximum." src="//upload.wikimedia.org/wikipedia/commons/thumb/7/72/Max_paraboloid.svg/150px-Max_paraboloid.svg.png" width="150" height="120" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/7/72/Max_paraboloid.svg/225px-Max_paraboloid.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/7/72/Max_paraboloid.svg/300px-Max_paraboloid.svg.png 2x" data-file-width="700" data-file-height="560" /></a></div>
+</div>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="col" class="navbox-title" colspan="2" style=";">
+<div id="Constrained_nonlinear" style="font-size:114%;margin:0 4em"><a href="/wiki/Nonlinear_programming" title="Nonlinear programming">Constrained nonlinear</a></div>
+</th>
+</tr>
+<tr>
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">General</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Barrier_function" title="Barrier function">Barrier methods</a></li>
+<li><a href="/wiki/Penalty_method" title="Penalty method">Penalty methods</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">Differentiable</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Augmented_Lagrangian_method" title="Augmented Lagrangian method">Augmented Lagrangian methods</a></li>
+<li><a href="/wiki/Sequential_quadratic_programming" title="Sequential quadratic programming">Sequential quadratic programming</a></li>
+<li><a href="/wiki/Successive_linear_programming" title="Successive linear programming">Successive linear programming</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="col" class="navbox-title" colspan="2" style=";">
+<div id="Convex_optimization" style="font-size:114%;margin:0 4em"><a href="/wiki/Convex_optimization" title="Convex optimization">Convex optimization</a></div>
+</th>
+</tr>
+<tr>
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Convex_minimization" class="mw-redirect" title="Convex minimization">Convex<br />
+minimization</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Cutting-plane_method" title="Cutting-plane method">Cutting-plane method</a></li>
+<li><a href="/wiki/Frank%E2%80%93Wolfe_algorithm" title="Frank–Wolfe algorithm">Reduced gradient (Frank–Wolfe)</a></li>
+<li><a href="/wiki/Subgradient_method" title="Subgradient method">Subgradient method</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Linear_programming" title="Linear programming">Linear</a> and<br />
+<a href="/wiki/Quadratic_programming" title="Quadratic programming">quadratic</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Linear_programming#Interior_point" title="Linear programming">Interior point</a></th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Affine_scaling" title="Affine scaling">Affine scaling</a></li>
+<li><a href="/wiki/Ellipsoid_method" title="Ellipsoid method">Ellipsoid algorithm of Khachiyan</a></li>
+<li><a href="/wiki/Karmarkar%27s_algorithm" title="Karmarkar's algorithm">Projective algorithm of Karmarkar</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Matroid" title="Matroid">Basis-</a><a href="/wiki/Exchange_algorithm" class="mw-redirect" title="Exchange algorithm">exchange</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Simplex_algorithm" title="Simplex algorithm">Simplex algorithm of Dantzig</a></li>
+<li><a href="/wiki/Revised_simplex_algorithm" class="mw-redirect" title="Revised simplex algorithm">Revised simplex algorithm</a></li>
+<li><a href="/wiki/Criss-cross_algorithm" title="Criss-cross algorithm">Criss-cross algorithm</a></li>
+<li><a href="/wiki/Lemke%27s_algorithm" title="Lemke's algorithm">Principal pivoting algorithm of Lemke</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="col" class="navbox-title" colspan="2" style=";">
+<div id="Combinatorial" style="font-size:114%;margin:0 4em"><a href="/wiki/Combinatorial_optimization" title="Combinatorial optimization">Combinatorial</a></div>
+</th>
+</tr>
+<tr>
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:1%">Paradigms</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Approximation_algorithm" title="Approximation algorithm">Approximation algorithm</a></li>
+<li><a href="/wiki/Dynamic_programming" title="Dynamic programming">Dynamic programming</a></li>
+<li><a href="/wiki/Greedy_algorithm" title="Greedy algorithm">Greedy algorithm</a></li>
+<li><a href="/wiki/Integer_programming" title="Integer programming">Integer programming</a>
+<ul>
+<li><a href="/wiki/Branch_and_bound" title="Branch and bound">Branch and bound</a>/<a href="/wiki/Branch_and_cut" title="Branch and cut">cut</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Graph_algorithm" class="mw-redirect" title="Graph algorithm">Graph<br />
+algorithms</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Minimum_spanning_tree" title="Minimum spanning tree">Minimum<br />
+spanning tree</a></th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Bellman%E2%80%93Ford_algorithm" title="Bellman–Ford algorithm">Bellman–Ford</a></li>
+<li><a href="/wiki/Bor%C5%AFvka%27s_algorithm" title="Borůvka's algorithm">Borůvka</a></li>
+<li><a href="/wiki/Dijkstra%27s_algorithm" title="Dijkstra's algorithm">Dijkstra</a></li>
+<li><a href="/wiki/Floyd%E2%80%93Warshall_algorithm" title="Floyd–Warshall algorithm">Floyd–Warshall</a></li>
+<li><a href="/wiki/Johnson%27s_algorithm" title="Johnson's algorithm">Johnson</a></li>
+<li><a href="/wiki/Kruskal%27s_algorithm" title="Kruskal's algorithm">Kruskal</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:1%"><a href="/wiki/Flow_network" title="Flow network">Network flows</a></th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Dinic%27s_algorithm" title="Dinic's algorithm">Dinic</a></li>
+<li><a href="/wiki/Edmonds%E2%80%93Karp_algorithm" title="Edmonds–Karp algorithm">Edmonds–Karp</a></li>
+<li><a href="/wiki/Ford%E2%80%93Fulkerson_algorithm" title="Ford–Fulkerson algorithm">Ford–Fulkerson</a></li>
+<li><a href="/wiki/Push%E2%80%93relabel_maximum_flow_algorithm" title="Push–relabel maximum flow algorithm">Push–relabel maximum flow</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup navbox-spacing-temp" style="border-spacing:0">
+<tr>
+<th scope="col" class="navbox-title" colspan="2" style=";">
+<div id="Metaheuristics" style="font-size:114%;margin:0 4em"><a href="/wiki/Metaheuristic" title="Metaheuristic">Metaheuristics</a></div>
+</th>
+</tr>
+<tr>
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="/wiki/Evolutionary_algorithm" title="Evolutionary algorithm">Evolutionary algorithm</a></li>
+<li><a href="/wiki/Hill_climbing" title="Hill climbing">Hill climbing</a></li>
+<li><a href="/wiki/Local_search_(optimization)" title="Local search (optimization)">Local search</a></li>
+<li><a href="/wiki/Simulated_annealing" title="Simulated annealing">Simulated annealing</a></li>
+<li><a href="/wiki/Tabu_search" title="Tabu search">Tabu search</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="navbox-abovebelow" colspan="3">
+<div>
+<ul>
+<li><a href="/wiki/Comparison_of_optimization_software" title="Comparison of optimization software">Software</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+
+
+<!-- 
+NewPP limit report
+Parsed by mw1216
+Cached time: 20170709205756
+Cache expiry: 2592000
+Dynamic content: false
+CPU time usage: 0.180 seconds
+Real time usage: 0.307 seconds
+Preprocessor visited node count: 1199/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 88381/2097152 bytes
+Template argument size: 8659/2097152 bytes
+Highest expansion depth: 12/40
+Expensive parser function count: 3/500
+Lua time usage: 0.061/10.000 seconds
+Lua memory usage: 2.93 MB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  159.502      1 -total
+ 32.47%   51.794      1 Template:Optimization_algorithms
+ 31.53%   50.286      1 Template:Third-party_sources
+ 30.72%   48.994      1 Template:Navbox_with_collapsible_groups
+ 20.75%   33.101      1 Template:Reflist
+ 18.54%   29.574      2 Template:Ambox
+ 18.18%   29.005      1 Template:Cite_journal
+ 12.31%   19.643      7 Template:Navbox
+  5.76%    9.192      1 Template:DMCA
+  5.33%    8.502      1 Template:Confused
+-->
+</div>
+<!-- Saved in parser cache with key enwiki:pcache:idhash:14382068-0!canonical!math=5 and timestamp 20170709205755 and revision id 781039449
+ -->
+<noscript><img src="//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://en.wikipedia.org/w/index.php?title=Artificial_bee_colony_algorithm&amp;oldid=781039449">https://en.wikipedia.org/w/index.php?title=Artificial_bee_colony_algorithm&amp;oldid=781039449</a>"					</div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="/wiki/Help:Category" title="Help:Category">Categories</a>: <ul><li><a href="/wiki/Category:Nature-inspired_metaheuristics" title="Category:Nature-inspired metaheuristics">Nature-inspired metaheuristics</a></li></ul></div><div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul><li><a href="/wiki/Category:Articles_lacking_reliable_references_from_April_2017" title="Category:Articles lacking reliable references from April 2017">Articles lacking reliable references from April 2017</a></li><li><a href="/wiki/Category:All_articles_lacking_reliable_references" title="Category:All articles lacking reliable references">All articles lacking reliable references</a></li><li><a href="/wiki/Category:Articles_needing_additional_references_from_April_2017" title="Category:Articles needing additional references from April 2017">Articles needing additional references from April 2017</a></li><li><a href="/wiki/Category:All_articles_needing_additional_references" title="Category:All articles needing additional references">All articles needing additional references</a></li></ul></div></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-anonuserpage">Not logged in</li><li id="pt-anontalk"><a href="/wiki/Special:MyTalk" title="Discussion about edits from this IP address [n]" accesskey="n">Talk</a></li><li id="pt-anoncontribs"><a href="/wiki/Special:MyContributions" title="A list of edits made from this IP address [y]" accesskey="y">Contributions</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Special:CreateAccount&amp;returnto=Artificial+bee+colony+algorithm" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a href="/w/index.php?title=Special:UserLogin&amp;returnto=Artificial+bee+colony+algorithm" title="You're encouraged to log in; however, it's not mandatory. [o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li  id="ca-nstab-main" class="selected"><span><a href="/wiki/Artificial_bee_colony_algorithm"  title="View the content page [c]" accesskey="c">Article</a></span></li>
+															<li  id="ca-talk"><span><a href="/wiki/Talk:Artificial_bee_colony_algorithm"  title="Discussion about the content page [t]" accesskey="t" rel="discussion">Talk</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variants</span><div></div>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="/wiki/Artificial_bee_colony_algorithm" >Read</a></span></li>
+															<li id="ca-edit"><span><a href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=edit"  title="Edit this page [e]" accesskey="e">Edit</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=history"  title="Past revisions of this page [h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>More</span><div></div></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/w/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Search Wikipedia" title="Search Wikipedia [f]" accesskey="f" id="searchInput"/><input type="hidden" value="Special:Search" name="title"/><input type="submit" name="fulltext" value="Search" title="Search Wikipedia for this text" id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton"/>							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Main_Page"  title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="/wiki/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li><li id="n-contents"><a href="/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li><li id="n-featuredcontent"><a href="/wiki/Portal:Featured_content" title="Featured content – the best of Wikipedia">Featured content</a></li><li id="n-currentevents"><a href="/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li><li id="n-randompage"><a href="/wiki/Special:Random" title="Load a random article [x]" accesskey="x">Random article</a></li><li id="n-sitesupport"><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en" title="Support us">Donate to Wikipedia</a></li><li id="n-shoplink"><a href="//shop.wikimedia.org" title="Visit the Wikipedia store">Wikipedia store</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-interaction' aria-labelledby='p-interaction-label'>
+			<h3 id='p-interaction-label'>Interaction</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-help"><a href="/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li><li id="n-aboutsite"><a href="/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li><li id="n-portal"><a href="/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li><li id="n-recentchanges"><a href="/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li><li id="n-contactpage"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact page</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="/wiki/Special:WhatLinksHere/Artificial_bee_colony_algorithm" title="List of all English Wikipedia pages containing links to this page [j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="/wiki/Special:RecentChangesLinked/Artificial_bee_colony_algorithm" rel="nofollow" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li><li id="t-upload"><a href="/wiki/Wikipedia:File_Upload_Wizard" title="Upload files [u]" accesskey="u">Upload file</a></li><li id="t-specialpages"><a href="/wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-permalink"><a href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;oldid=781039449" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;action=info" title="More information about this page">Page information</a></li><li id="t-wikibase"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q4801057" title="Link to connected data repository item [g]" accesskey="g">Wikidata item</a></li><li id="t-cite"><a href="/w/index.php?title=Special:CiteThisPage&amp;page=Artificial_bee_colony_algorithm&amp;id=781039449" title="Information on how to cite this page">Cite this page</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-coll-print_export' aria-labelledby='p-coll-print_export-label'>
+			<h3 id='p-coll-print_export-label'>Print/export</h3>
+
+			<div class="body">
+									<ul>
+						<li id="coll-create_a_book"><a href="/w/index.php?title=Special:Book&amp;bookcmd=book_creator&amp;referer=Artificial+bee+colony+algorithm">Create a book</a></li><li id="coll-download-as-rdf2latex"><a href="/w/index.php?title=Special:ElectronPdf&amp;page=Artificial+bee+colony+algorithm&amp;action=show-selection-screen&amp;coll-download-url=%2Fw%2Findex.php%3Ftitle%3DSpecial%3ABook%26bookcmd%3Drender_article%26arttitle%3DArtificial%2Bbee%2Bcolony%2Balgorithm%26returnto%3DArtificial%2Bbee%2Bcolony%2Balgorithm%26oldid%3D781039449%26writer%3Drdf2latex">Download as PDF</a></li><li id="t-print"><a href="/w/index.php?title=Artificial_bee_colony_algorithm&amp;printable=yes" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-lang' aria-labelledby='p-lang-label'>
+			<h3 id='p-lang-label'>Languages</h3>
+
+			<div class="body">
+									<ul>
+						<li class="interlanguage-link interwiki-bg"><a href="https://bg.wikipedia.org/wiki/%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D1%8A%D0%BC_%D0%BD%D0%B0_%D0%B8%D0%B7%D0%BA%D1%83%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%B8%D1%82%D0%B5_%D0%BF%D1%87%D0%B5%D0%BB%D0%BD%D0%B8_%D1%81%D0%B5%D0%BC%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B0" title="Алгоритъм на изкуствените пчелни семейства – Bulgarian" lang="bg" hreflang="bg" class="interlanguage-link-target">Български</a></li><li class="interlanguage-link interwiki-es"><a href="https://es.wikipedia.org/wiki/Algoritmo_colonia_de_abejas_artificiales" title="Algoritmo colonia de abejas artificiales – Spanish" lang="es" hreflang="es" class="interlanguage-link-target">Español</a></li><li class="interlanguage-link interwiki-fa"><a href="https://fa.wikipedia.org/wiki/%D8%A7%D9%84%DA%AF%D9%88%D8%B1%DB%8C%D8%AA%D9%85_%DA%A9%D9%84%D9%88%D9%86%DB%8C_%D8%B2%D9%86%D8%A8%D9%88%D8%B1_%D8%B9%D8%B3%D9%84" title="الگوریتم کلونی زنبور عسل – Persian" lang="fa" hreflang="fa" class="interlanguage-link-target">فارسی</a></li>					</ul>
+				<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a href="https://www.wikidata.org/wiki/Special:EntityPage/Q4801057#sitelinks-wikipedia" title="Edit interlanguage links" class="wbc-editpage">Edit links</a></span></div>			</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last edited on 18 May 2017, at 18:13.</li>
+											<li id="footer-info-copyright">Text is available under the <a rel="license" href="//en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License">Creative Commons Attribution-ShareAlike License</a><a rel="license" href="//creativecommons.org/licenses/by-sa/3.0/" style="display:none;"></a>;
+additional terms may apply.  By using this site, you agree to the <a href="//wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> and <a href="//wikimediafoundation.org/wiki/Privacy_policy">Privacy Policy</a>. Wikipedia® is a registered trademark of the <a href="//www.wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>, a non-profit organization.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="https://wikimediafoundation.org/wiki/Privacy_policy" class="extiw" title="wmf:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+											<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+											<li id="footer-places-contact"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact Wikipedia</a></li>
+											<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Developers</a></li>
+											<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Cookie statement</a></li>
+											<li id="footer-places-mobileview"><a href="//en.m.wikipedia.org/w/index.php?title=Artificial_bee_colony_algorithm&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Mobile view</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="https://wikimediafoundation.org/"><img src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"/></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="//www.mediawiki.org/"><img src="/static/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.180","walltime":"0.307","ppvisitednodes":{"value":1199,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1500000},"postexpandincludesize":{"value":88381,"limit":2097152},"templateargumentsize":{"value":8659,"limit":2097152},"expansiondepth":{"value":12,"limit":40},"expensivefunctioncount":{"value":3,"limit":500},"entityaccesscount":{"value":0,"limit":400},"timingprofile":["100.00%  159.502      1 -total"," 32.47%   51.794      1 Template:Optimization_algorithms"," 31.53%   50.286      1 Template:Third-party_sources"," 30.72%   48.994      1 Template:Navbox_with_collapsible_groups"," 20.75%   33.101      1 Template:Reflist"," 18.54%   29.574      2 Template:Ambox"," 18.18%   29.005      1 Template:Cite_journal"," 12.31%   19.643      7 Template:Navbox","  5.76%    9.192      1 Template:DMCA","  5.33%    8.502      1 Template:Confused"]},"scribunto":{"limitreport-timeusage":{"value":"0.061","limit":"10.000"},"limitreport-memusage":{"value":3072600,"limit":52428800}},"cachereport":{"origin":"mw1216","timestamp":"20170709205756","ttl":2592000,"transientcontent":false}}});});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":67,"wgHostname":"mw1239"});});</script>
+	</body>
+</html>
